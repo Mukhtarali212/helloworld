@@ -1,6 +1,6 @@
 import webapp2
 
-class MainPage(webbapp2.RequestHandler) :
+class MainPage(webapp2.RequestHandler) :
     def get(self):
 	self.response.write("Hello World")
 
