@@ -1,8 +1,9 @@
-FROM golang:1.8-alpine
-ADD . /go/src/hello-app
-RUN go install hello-app
+FROM golang:1.12 as builder
+WORKDIR /app
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
 
 FROM alpine:latest
-COPY --from=0 /go/bin/hello-app .
-ENV PORT 8080
-CMD ["./hello-app"]
+RUN apk add --no-cache -ca-certificates
+COPY --from=builder /app/helloworld /helloworld
+CMD ["./helloworld"]
