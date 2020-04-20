@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: gcr.io/irfan-labs/first@sha256:009b372c65e9ac0d49e46168ed4cf5dfe4841696b4f9e4aa7d8d9e02baa0b12a
+        ports:
+        - containerPort: 80
